@@ -1,0 +1,19 @@
+version: '3.8' # Specify the Docker Compose file format version
+
+services:
+  web-api:
+    build: .  # Build the image using the Dockerfile in the current directory
+    container_name: job_recommender_api
+    
+    # Map port 5000 on your host machine to port 5000 in the container
+    ports:
+      - "5000:5000"
+      
+    # Mount the Data Set.csv file into the container's working directory (/app).
+    # This prevents the large data file from being permanently stored inside the image, 
+    # saving space and build time.
+    volumes:
+      - ./DataSet.csv:/app/DataSet.csv
+    
+    # Set restart policy
+    restart: always
